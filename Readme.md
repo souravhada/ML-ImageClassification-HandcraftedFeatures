@@ -5,22 +5,24 @@ This report describes the development and evaluation and deployment of a machine
 
 ## Repository Structure
 
-├── Confusion_Matrix.png # Image showing the confusion matrix of the model
-├── Readme.md # The main README file with project details and instructions
-├── Oversampling.png # Image showing the effect of oversampling on model performance
-├── Undersampling.png # Image showing the effect of undersampling on model performance
-├── app.py # Flask application file for running the web server
-├── requirements.txt # List of dependencies to install using pip
-├── Notebook.ipynb # Jupyter notebook with model development
-├── Templates/ # Folder containing HTML templates for the Flask app
-│ └── index.html # Main HTML file for the web interface
-└── model/ # Folder containing the serialized model and PCA model
-│ └── pca_model.pkl # Pickle file containing the PCA transformation
-│ └──svm_classifier.pkl # Pickle file containing the serialized SVM model
+This directory structure outlines the organization of the image classification project:
+
+* **Confusion_Matrix.png** (Image file): Screenshot of the model's confusion matrix.
+* **Readme.md** (Markdown file): The project's main documentation, containing details, instructions, and usage information (you're reading it now!).
+* **Oversampling.png** (Image file): Depicts the impact of oversampling on the model's performance visually.
+* **Undersampling.png** (Image file): Depicts the impact of undersampling on the model's performance visually.
+* **app.py** (Python file): Core logic for the Flask web application, handling server startup and image classification.
+* **requirements.txt** (Text file): Lists all external Python libraries required to run the project. Use `pip install -r requirements.txt` for installation.
+* **Notebook.ipynb** (Jupyter Notebook file): Contains the code used for model development and experimentation.
+* **Templates/ folder** (Directory): Stores the HTML templates defining the web application's user interface structure and layout.
+    * **index.html** (HTML file): The main HTML file defining the web page where users upload images and view classification results.
+* **model/ folder** (Directory): Stores the serialized model artifacts used for image classification.
+    * **pca_model.pkl** (Pickle file): Contains the serialized PCA transformation model used for dimensionality reduction.
+    * **svm_classifier.pkl** (Pickle file): Contains the serialized SVM classification model used for predicting image categories.
 
 
 
-```markdown
+
 ## Usage and Installation
 
 ### Prerequisites:
@@ -29,36 +31,35 @@ This report describes the development and evaluation and deployment of a machine
 
 **Clone this repository using git**:
 
-\```bash
+```bash
 git clone https://github.com/souravhada/ML-ImageClassification-HandcraftedFeatures
-\```
+```
 
 **Navigate to the project directory**:
 
-\```bash
+```bash
 cd image-classification-flask-app
-\```
+```
 
 **Install the required dependencies using pip**:
 
-\```bash
+```bash
 pip install -r requirements.txt
-\```
+```
 
 Running the Application:
 
 **Start the Flask development server:**
 
-\```bash
+```bash
 python app.py
-\```
+```
 
 Open your web browser and navigate to http://127.0.0.1:5000/ (replace 127.0.0.1 with your local machine IP if running on a different machine).
 
 The web interface will allow you to upload an image for classification. The application will process the image and display the predicted category.
 
 **Notes**: *The requirements.txt file specifies all the necessary Python libraries used in the project.*
-```
 
 # Analysis 
 
