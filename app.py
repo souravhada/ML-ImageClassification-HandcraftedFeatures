@@ -6,20 +6,23 @@ import pickle
 
 app = Flask(__name__)
 
-# Load the model from the specified folder using pickle
+# Loading the model from the specified folder using pickle
 with open("model/svm_classifier.pkl", "rb") as f:
     model = pickle.load(f)
 
-# Load the PCA model
+# Loading the PCA model
 with open("model/pca_model.pkl", "rb") as f:
     pca = pickle.load(f)
 
-# Define or load label mapping
+# Define label mapping
 label_mapping = {'Building': 0, 'Forest': 1, 'Glacier': 2, 'Mountains': 3, 'Sea': 4, 'Streets': 5}
 # Inverse mapping to get labels from prediction indices
 inverse_label_mapping = {v: k for k, v in label_mapping.items()}
 
 def preprocess_and_extract_features(input_data, fixed_length=45000):
+    """
+    Function to Preprocess the input image data and extracts features using HOG, LBP, and SIFT.
+    """
     if not isinstance(input_data, np.ndarray):
         raise TypeError("Input data must be an image array")
 
@@ -46,10 +49,16 @@ def preprocess_and_extract_features(input_data, fixed_length=45000):
 
 @app.route("/", methods=["GET"])
 def index():
+    """
+    Function to render the index.html template for uploading images.
+    """
     return render_template("index.html")
 
 @app.route("/predict", methods=["POST"])
 def predict():
+    """
+    Function to Predict the class label of the uploaded image using the trained model.
+    """
     file = request.files['image']
     nparr = np.frombuffer(file.read(), np.uint8)
     img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
