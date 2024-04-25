@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Classification</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 600px;
+        }
+        h1, h2 {
+            color: #444;
+        }
+        form {
+            margin-top: 20px;
+        }
+        input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #5c67f2;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 10px;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #5058e2;
+        }
+        #results {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e9e9ff;
+            border-left: 5px solid #5c67f2;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.8em;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Image Classifier</h1>
+        <p>Classify images into one of six categories using our SVM-based model.</p>
+        <form id="upload-form" enctype="multipart/form-data">
+            <input type="file" id="image-input" name="image" accept="image/*" required>
+            <button type="button" onclick="submitImage()">Upload and Classify</button>
+        </form>
+        <h2>Results:</h2>
+        <div id="results">Your results will appear here...</div>
+        <div class="footer">Application developed by Sourav Hada</div>
+    </div>
+
+    <script>
+        function submitImage() {
+            const formData = new FormData();
+            const imageFile = document.getElementById('image-input').files[0];
+            formData.append("image", imageFile);
+
+            fetch('http://127.0.0.1:5000/predict', {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => response.json())
+            .then(data => {
+                const resultsDiv = document.getElementById('results');
+                resultsDiv.innerHTML = ''; // Clear previous results
+                if (data.prediction && data.prediction.length > 0) {
+                    resultsDiv.innerHTML = `Prediction: ${data.prediction} <br>`;
+                    if (data.confidence) {
+                        resultsDiv.innerHTML += `Confidence: ${(data.confidence * 100).toFixed(2)}%`;
+                    }
+                } else {
+                    resultsDiv.innerHTML = "Failed to get a valid prediction.";
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('results').innerHTML = "Error in processing your request.";
+            });
+        }
+    </script>
+</body>
+</html>
