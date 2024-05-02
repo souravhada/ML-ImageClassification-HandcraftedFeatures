@@ -1,6 +1,6 @@
 ## Introduction
 
-This report describes the development and evaluation and deployment of a machine learning model for the task of image classification. The goal was to classify images into six distinct categories: Buildings, Forest, Glacier, Mountain, Sea, and Street. The dataset used for training and testing comprised images representative of these classes, with a notable imbalance in the number of samples per class.
+This report describes the development, evaluation and deployment of a machine learning model for the task of image classification. The goal was to classify images into six distinct categories: Buildings, Forest, Glacier, Mountain, Sea, and Street. The dataset used for training and testing comprised images representative of these classes, with a notable imbalance in the number of samples per class.
 
 
 ## Repository Structure
